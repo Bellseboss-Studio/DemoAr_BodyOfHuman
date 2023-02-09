@@ -39,7 +39,6 @@ public class EnemiSpawnerMediator : MonoBehaviour
             
             enemyInGame.OnEnemyDestroy += () =>
             {
-                _mediator.RestarVida(10);
                 enemiesInstatiate.Remove(enemyInGame);
             };
             enemyInGame.OnEnemyDestroyLegal += () =>

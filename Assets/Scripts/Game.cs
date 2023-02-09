@@ -13,7 +13,6 @@ public class Game : IEnemyState
     public async UniTask<StateResult> DoAction(object data)
     {
         _mediator.Write($"Game");
-        _mediator.ConfiguraEnemigoSpawner();
         _mediator.ConfigureShooter();
         //_mediator.ShowButtonRespawn();
         while (!_mediator.FinishGame())

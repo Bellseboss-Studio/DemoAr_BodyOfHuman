@@ -118,7 +118,7 @@ public class InstallerStatesOfGame : MonoBehaviour, IMediadorAR
 
     public void OnMousePosition(InputAction.CallbackContext context)
     {
-        //stateOfGame.Write($"{context.ReadValue<Vector2>()}");
+        stateOfGame.Write($"{context.ReadValue<Vector2>()}");
         _mousePosition = context.ReadValue<Vector2>();
     }
     

@@ -11,8 +11,6 @@ public class FinishGame : IEnemyState
     }
     public async UniTask<StateResult> DoAction(object data)
     {
-        _mediator.StopSpawnAndDestroidAll();
-        _mediator.ShowTheGameOver();
         while (!_mediator.HasWait())
         {
             if (_mediator.RespawnScene())

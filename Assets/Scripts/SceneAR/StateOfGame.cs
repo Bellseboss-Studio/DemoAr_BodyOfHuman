@@ -1,10 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
-using ServiceLocatorPath;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class StateOfGame : MonoBehaviour, IMediator
@@ -13,18 +10,17 @@ public class StateOfGame : MonoBehaviour, IMediator
     [SerializeField] GameObject m_PlacedPrefab;
     [SerializeField] private ShooterToEnemies shooter;
     [SerializeField] private Camera camera;
-    [SerializeField] private Animator anim_tracking, anim_make3D, anim_look_around;
-    [SerializeField] private Button butonRespawn;
     private EnemyStatesConfiguration _enemyStatesConfiguration;
     private IMediadorAR _ar;
     private bool _buclePrincipal;
     private bool hasWait;
     private bool canUse;
-    private Vector2 positionToClick;
     private bool _hasClick;
     private int _vidaHeal;
     private EscenarioInteractivo escenarioInteractivo;
     private bool canRespawn, isShowAnimations;
+    private bool inGame;
+    private Vector2 positionToClick;
 
 
     public void Configuracion(IMediadorAR ar)
@@ -43,41 +39,8 @@ public class StateOfGame : MonoBehaviour, IMediator
         StartState(_enemyStatesConfiguration.GetInitialState());
         canUse = true;
         Write($"Configurado");
-        
-        ServiceLocator.Instance.GetService<ILoadScream>().Open(() => { });
-        
-        anim_tracking.gameObject.SetActive(false);
-        anim_make3D.gameObject.SetActive(false);
-        anim_look_around.gameObject.SetActive(false);
-        butonRespawn.gameObject.SetActive(false);
-    }
-
-    public async void LoadScene(int sceneIndex)
-    {
-        ServiceLocator.Instance.GetService<ILoadScream>().Close(() =>
-        {
-            _ar.ResetSession();
-            Destroy(escenarioInteractivo.gameObject);
-            SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
-        }).Forget();
-    }
-    public void Respawn()
-    {
-        canRespawn = true;
-        //Debug.Log("respawn = true");
     }
     
-    private void ColocarVida(int _vida)
-    {
-        _vidaHeal = _vida;
-        RedibujarVida();
-    }
-
-    private void RedibujarVida()
-    {
-        //vida.text = $"{_vidaHeal}";
-    }
-
     private void Update()
     {
         if (!canUse) return;
@@ -138,31 +101,9 @@ public class StateOfGame : MonoBehaviour, IMediator
         }
     }
 
-    public void ConfiguraEnemigoSpawner()
-    {
-        //spawnerEnemy.Configuration(this);
-    }
-
-    public void RestarVida(int vidaToRestar)
-    {
-        _vidaHeal -= vidaToRestar;
-        RedibujarVida();
-    }
-
     public bool HasWait()
     {
         return hasWait;
-    }
-
-    public void StopSpawnAndDestroidAll()
-    {
-        //spawnerEnemy.StopSpawn();
-        //spawnerEnemy.CleanEnemies();
-    }
-
-    public void ShowTheGameOver()
-    {
-        //panelToGameOver.SetActive(true);        
     }
 
     public void ConfigureShooter()
@@ -198,32 +139,17 @@ public class StateOfGame : MonoBehaviour, IMediator
     public async UniTaskVoid ShowTrackingAnimator()
     {
         if(isShowAnimations) return;
-        anim_tracking.gameObject.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromMilliseconds(5000));
-        anim_tracking?.gameObject.SetActive(false);
-        if(inGame) return;
-        anim_make3D?.gameObject.SetActive(true);
+        await UniTask.Delay(TimeSpan.FromMilliseconds(500));
     }
 
-    private bool inGame;
     public async UniTaskVoid ShowLookAroundAnimator()
     {
         if(isShowAnimations) return;
         inGame = true;
-        anim_tracking.gameObject.SetActive(false);
-        anim_make3D.gameObject.SetActive(false);
         await UniTask.Delay(TimeSpan.FromMilliseconds(200));
-        anim_look_around.gameObject.SetActive(true);
-        await UniTask.Delay(TimeSpan.FromMilliseconds(5000));
-        anim_look_around?.gameObject.SetActive(false);
+        //await UniTask.Delay(TimeSpan.FromMilliseconds(5000));
         isShowAnimations = true;
     }
-
-    public void ShowButtonRespawn()
-    {
-        butonRespawn.gameObject.SetActive(true);
-    }
-
     public bool RespawnScene()
     {
         return canRespawn;
@@ -234,17 +160,11 @@ public class StateOfGame : MonoBehaviour, IMediator
         Write("Restart all");
         Destroy(escenarioInteractivo.gameObject);
         canRespawn = false;
-        anim_look_around.gameObject.SetActive(false);
     }
 
     public void StopAudioGeneral()
     {
         escenarioInteractivo.StopAudioGeneral();
-    }
-
-    public void StartSessionOfAR()
-    {
-        //_ar.StartSession();
     }
 
     public bool HasClickInScream()
