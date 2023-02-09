@@ -103,6 +103,8 @@ public class InstallerStatesOfGame : MonoBehaviour, IMediadorAR
             
             stateOfGame.Write($"{spawnedObject.transform.position} spawned");
             
+            SetAllPlanesActive(false);
+            
             return spawnedObject;
         }
 
@@ -167,5 +169,10 @@ public class InstallerStatesOfGame : MonoBehaviour, IMediadorAR
     public void Repetir()
     {
         SceneManager.LoadScene(0);
+    }
+    void SetAllPlanesActive(bool value)
+    {
+        foreach (var p in plane.trackables)
+            p.gameObject.SetActive(value);
     }
 }
