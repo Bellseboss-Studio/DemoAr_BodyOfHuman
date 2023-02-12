@@ -985,7 +985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugging: {fileID: 819946994}
-  m_PlacedPrefab: {fileID: 258440662717060318, guid: a21d57b4694177d46a581f7a3b36c831,
+  m_PlacedPrefab: {fileID: 937151594247907451, guid: 1c54313118154a348846e412c88e21ba,
     type: 3}
   shooter: {fileID: 1270279104}
   camera: {fileID: 304055335}
