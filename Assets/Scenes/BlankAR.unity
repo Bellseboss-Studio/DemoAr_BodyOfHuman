@@ -38,7 +38,8 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.0040296516, g: 0.00021971055, b: 0.000000054617345,
+    a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -766,7 +767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &900670486
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1079,7 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugging: {fileID: 819946994}
-  m_PlacedPrefab: {fileID: 1599010255417765765, guid: 3554ebf0e25af094e8cd3ca90aa6a992,
+  m_PlacedPrefab: {fileID: 2643102332351736153, guid: f38c4908faf7f64458b4ed257242b45d,
     type: 3}
   shooter: {fileID: 1270279104}
   camera: {fileID: 304055335}
