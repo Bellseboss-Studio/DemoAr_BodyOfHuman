@@ -10,6 +10,7 @@ public class StateOfGame : MonoBehaviour, IMediator
     [SerializeField] GameObject m_PlacedPrefab;
     [SerializeField] private ShooterToEnemies shooter;
     [SerializeField] private Camera camera;
+    public Action OnInstantiateElement;
     private EnemyStatesConfiguration _enemyStatesConfiguration;
     private IMediadorAR _ar;
     private bool _buclePrincipal;
@@ -17,7 +18,7 @@ public class StateOfGame : MonoBehaviour, IMediator
     private bool canUse;
     private bool _hasClick;
     private int _vidaHeal;
-    private EscenarioInteractivo escenarioInteractivo;
+    private GameObject escenarioInteractivo;
     private bool canRespawn, isShowAnimations;
     private bool inGame;
     private Vector2 positionToClick;
@@ -38,6 +39,7 @@ public class StateOfGame : MonoBehaviour, IMediator
         _buclePrincipal = true;
         StartState(_enemyStatesConfiguration.GetInitialState());
         canUse = true;
+        _vidaHeal = 1;
         Write($"Configurado");
     }
     
@@ -88,10 +90,10 @@ public class StateOfGame : MonoBehaviour, IMediator
             Write($"instancia");
             if (escenarioInteractivo == null)
             {
-                escenarioInteractivo = _ar.InstantiateObjectInRaycast(GetPositionInWord(), m_PlacedPrefab).GetComponent<EscenarioInteractivo>();
-                escenarioInteractivo.Configuracion(camera, this, _ar.GetPlayer());
+                escenarioInteractivo = _ar.InstantiateObjectInRaycast(GetPositionInWord(), m_PlacedPrefab);
             }
             action?.Invoke();
+            OnInstantiateElement?.Invoke();
             return true;
         }
         catch (Exception e)
@@ -164,7 +166,6 @@ public class StateOfGame : MonoBehaviour, IMediator
 
     public void StopAudioGeneral()
     {
-        escenarioInteractivo.StopAudioGeneral();
     }
 
     public bool HasClickInScream()
@@ -189,5 +190,10 @@ public class StateOfGame : MonoBehaviour, IMediator
     {
         _buclePrincipal = false;
         canUse = false;
+    }
+
+    public GameObject GetObjectInstantiate()
+    {
+        return escenarioInteractivo;
     }
 }

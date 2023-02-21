@@ -11,6 +11,7 @@ public class FinishGame : IEnemyState
     }
     public async UniTask<StateResult> DoAction(object data)
     {
+        _mediator.Write($"FinishGame!");
         while (!_mediator.HasWait())
         {
             if (_mediator.RespawnScene())
