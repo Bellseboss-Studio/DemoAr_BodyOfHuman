@@ -112,12 +112,7 @@ public class StateOfGame : MonoBehaviour, IMediator
     {
         shooter.Configure(this);
     }
-
-    public ARRaycastManager GetRayCastManager()
-    {
-        return _ar.GetRayCastManager();
-    }
-
+    
     public Camera GetSessionOrigin()
     {
         return _ar.GetSessionOrigin();
@@ -166,6 +161,16 @@ public class StateOfGame : MonoBehaviour, IMediator
 
     public void StopAudioGeneral()
     {
+    }
+
+    public bool FinishedOfViewTutorial()
+    {
+        return false;
+    }
+
+    public void HideTutorial()
+    {
+        
     }
 
     public bool HasClickInScream()

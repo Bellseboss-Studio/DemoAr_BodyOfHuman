@@ -17,7 +17,6 @@ public class ConfigurationOfGame : IEnemyState
         await UniTask.Delay(TimeSpan.FromMilliseconds(100));
         _mediator.Write("Habilitando todo");
         //_mediator.StartSessionOfAR();
-        _mediator.ShowTrackingAnimator().Forget();
         _mediator.Write("Configuracion completada");
         return new StateResult(EnemyStatesConfiguration.WaitForClickInSpace);
     }

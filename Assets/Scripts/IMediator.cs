@@ -21,4 +21,6 @@ public interface IMediator
     bool RespawnScene();
     void RestartAllObjectsToRespawn();
     void StopAudioGeneral();
+    bool FinishedOfViewTutorial();
+    void HideTutorial();
 }

@@ -24,8 +24,7 @@ public class WaitForClick : IEnemyState
         {
             return new StateResult(EnemyStatesConfiguration.WaitForClickInSpace);
         }
-        _mediator.HideDebuggers();
-        _mediator.ShowLookAroundAnimator().Forget();
+        //_mediator.HideDebuggers();
         return new StateResult(EnemyStatesConfiguration.Game);
     }
 }

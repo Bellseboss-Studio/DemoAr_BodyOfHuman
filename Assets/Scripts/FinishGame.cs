@@ -12,7 +12,7 @@ public class FinishGame : IEnemyState
     public async UniTask<StateResult> DoAction(object data)
     {
         _mediator.Write($"FinishGame!");
-        while (!_mediator.HasWait())
+        /*while (!_mediator.HasWait())
         {
             if (_mediator.RespawnScene())
             {
@@ -20,7 +20,8 @@ public class FinishGame : IEnemyState
                 return new StateResult(EnemyStatesConfiguration.ConfigurationOfGame);
             }
             await UniTask.Delay(TimeSpan.FromMilliseconds(100));
-        }
+        }*/
+        await UniTask.Delay(TimeSpan.FromMilliseconds(1000));
         return new StateResult(EnemyStatesConfiguration.FinishGame);
     }
 }

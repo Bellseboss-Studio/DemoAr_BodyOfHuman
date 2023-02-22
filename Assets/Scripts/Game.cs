@@ -14,7 +14,6 @@ public class Game : IEnemyState
     {
         _mediator.Write($"Game");
         _mediator.ConfigureShooter();
-        //_mediator.ShowButtonRespawn();
         while (!_mediator.FinishGame())
         {
             await UniTask.Delay(TimeSpan.FromMilliseconds(100));

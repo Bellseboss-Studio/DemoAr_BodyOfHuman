@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ServiceLocatorPath;
 using UnityEngine;
@@ -7,30 +8,16 @@ using UnityEngine.Video;
 public class VideoRules : MonoBehaviour
 {
    [SerializeField] private VideoPlayer video;
-   [SerializeField] private VideoClip videoEs, videoEn;
-   [SerializeField] private GameObject panelSelectLanguage;
+   [SerializeField] private VideoClip videoEs;
 
-   public void SelectNewLanguage(string language)
+   private void Start()
    {
-      ServiceLocator.Instance.GetService<ILocalization>().ChangeLanguage(language);
-      
-      ServiceLocator.Instance.GetService<ILoadScream>().Close(() =>
-      {
-         panelSelectLanguage.SetActive(false);
-         ServiceLocator.Instance.GetService<ILoadScream>().Open(() =>
-         {
-            StartVideo();
-         }).Forget();
-      }).Forget();
+      StartVideo();
    }
-   public void StartVideo()
+
+   private void StartVideo()
    {
-      video.clip = ServiceLocator.Instance.GetService<ILocalization>().GetLanguage() switch
-      {
-         "ES" => videoEs,
-         "EN" => videoEn,
-         _ => video.clip
-      };
+      video.clip = videoEs;
       video.Play();
       StartCoroutine(FinishVideo());
    }
@@ -38,16 +25,13 @@ public class VideoRules : MonoBehaviour
    IEnumerator FinishVideo()
    {
       //Debug.Log($"start {video.clip.length}");
-      yield return new WaitForSeconds((float) video.clip.length + 0.1f);
+      yield return new WaitForSeconds((float) video.clip.length + 0.5f);
       //Debug.Log("finish");
       SkipVideo();
    }
 
    public void SkipVideo()
    {
-      ServiceLocator.Instance.GetService<ILoadScream>().Close(() =>
-      {
-         SceneManager.LoadScene(1);
-      }).Forget();
+      SceneManager.LoadScene(1);
    }
 }
