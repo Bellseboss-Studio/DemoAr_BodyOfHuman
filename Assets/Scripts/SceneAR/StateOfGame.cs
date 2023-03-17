@@ -18,7 +18,7 @@ public class StateOfGame : MonoBehaviour, IMediator
     private bool canUse;
     private bool _hasClick;
     private int _vidaHeal;
-    private GameObject escenarioInteractivo;
+    protected GameObject escenarioInteractivo;
     private bool canRespawn, isShowAnimations;
     private bool inGame;
     private Vector2 positionToClick;
