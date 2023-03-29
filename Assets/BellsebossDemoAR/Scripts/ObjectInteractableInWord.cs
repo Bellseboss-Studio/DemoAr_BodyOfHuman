@@ -3,63 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ObjectInteractableInWord : MonoBehaviour
+namespace BellsebossDemoAR.Scripts
 {
-    [SerializeField] private GameObject body;
-    [SerializeField] private GameObject[] otherOrgans;
-    private int _index;
-    [SerializeField] private List<Organ> _organs;
-
-    [Serializable]
-    public class Organ
+    public class ObjectInteractableInWord : MonoBehaviour
     {
-        public GameObject Model;
-        public List<Material> Materials;
-
-        public Organ(GameObject organ)
+        [SerializeField] private Organ body;
+        private int _index;
+        [SerializeField] private List<Organ> organs;
+        public Action OnChangeObject;
+    
+    
+        private void Start()
         {
-            Model = organ;
-            var renderers = organ.GetComponentsInChildren<Renderer>().ToList();
-            Materials = new List<Material>();
-            foreach (var material in renderers.SelectMany(renderer => renderer.materials))
+            ConfigureOrgans();
+            HideOtherObjects();
+            ShowOrgan();
+        }
+
+        private void ConfigureOrgans()
+        {
+            organs.Insert(0, body);
+            foreach (var organ in organs)
             {
-                Materials.Add(material);
+                organ.Configure();
             }
         }
-    }
-    
-    private void Start()
-    {
-        ConfigureOrgans();
-        body.SetActive(true);
-        HideOtherObjects();
-        ShowOrgan();
-    }
 
-    private void ConfigureOrgans()
-    {
-        _organs = new List<Organ> {new(body)};
-        foreach (var organ in otherOrgans)
+        public void NextObject()
         {
-            organ.SetActive(true);
-            _organs.Add(new Organ(organ));
+            CurrentOrganStoppedBeingFocused();
+            _index++;
+            if (_index >= organs.Count)
+            {
+                _index = 0;
+            }
+            ShowOrgan();
+            OnChangeObject?.Invoke();
         }
-    }
 
-    public void NextObject()
-    {
-        _index++;
-        if (_index >= _organs.Count)
+        private void ShowOrgan()
         {
-            _index = 0;
-        }
-        ShowOrgan();
-    }
-
-    private void ShowOrgan()
-    {
-        //Body in transparent transition
-        /*if (_index >= otherOrgans.Length)
+            //Body in transparent transition
+            /*if (_index >= otherOrgans.Length)
         {
             body.SetActive(true);
             HideOtherObjects();
@@ -70,33 +55,51 @@ public class ObjectInteractableInWord : MonoBehaviour
             //next object set active true
             otherOrgans[_index].SetActive(true);
         }*/
-        HideOtherObjects();
-        foreach (var material in _organs[_index].Materials)
-        {
-            var color = material.color;
-            material.color = new Color(color.r, color.g, color.b, 1);
-            material.renderQueue++;
+            HideOtherObjects();
+            foreach (var material in organs[_index].materials)
+            {
+                var color = material.color;
+                material.color = new Color(color.r, color.g, color.b, 1);
+                material.renderQueue++;
+            }
         }
-    }
 
-    private void HideOtherObjects()
-    {
+        private void HideOtherObjects()
+        {
         
-        foreach (var material in _organs.SelectMany(organ => organ.Materials))
-        {
-            var color = material.color;
-            material.color = new Color(color.r, color.g, color.b, .24f);
-            material.renderQueue = 3000;
+            foreach (var material in organs.SelectMany(organ => organ.materials))
+            {
+                var color = material.color;
+                material.color = new Color(color.r, color.g, color.b, .24f);
+                material.renderQueue = 3000;
+            }
         }
-    }
 
-    public void PreviousObject()
-    {
-        _index--;
-        if (_index < 0)
+        public void PreviousObject()
         {
-            _index = _organs.Count -1;
+            CurrentOrganStoppedBeingFocused();
+            _index--;
+            if (_index < 0)
+            {
+                _index = organs.Count -1;
+            }
+            ShowOrgan();
+            OnChangeObject?.Invoke();
         }
-        ShowOrgan();
+
+        public GameObject GetCurrentOrgan()
+        {
+            return organs[_index].gameObject;
+        }
+
+        public void CurrentOrganWasFocused()
+        {
+            organs[_index].ShowOrganCanvas();
+        }
+
+        public void CurrentOrganStoppedBeingFocused()
+        {
+            organs[_index].HideOrganCanvas();
+        }
     }
 }
