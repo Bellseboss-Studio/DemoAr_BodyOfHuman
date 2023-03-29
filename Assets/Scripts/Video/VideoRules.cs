@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
-using ServiceLocatorPath;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
@@ -12,6 +11,7 @@ public class VideoRules : MonoBehaviour
 
    private void Start()
    {
+      SkipVideo();
       StartVideo();
    }
 
