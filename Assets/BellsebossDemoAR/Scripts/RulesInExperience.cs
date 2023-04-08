@@ -17,6 +17,7 @@ public class RulesInExperience : MonoBehaviour
         {
             ui.SetActive(true);
             stateOfGame.GetObjectInstantiate().TryGetComponent(out _objectInteractableInWord);
+            _objectInteractableInWord.ConfigureOrgansCanvas(stateOfGame.GetUIEventsCamera(), stateOfGame);
         };
     }
 

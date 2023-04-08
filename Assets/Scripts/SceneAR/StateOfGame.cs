@@ -6,10 +6,10 @@ using UnityEngine.XR.ARFoundation;
 
 public class StateOfGame : MonoBehaviour, IMediator
 {
-    [SerializeField] private TextMeshProUGUI debugging;
+    [SerializeField] private TextMeshProUGUI debugging, debuggingAngel;
     [SerializeField] GameObject m_PlacedPrefab;
     [SerializeField] private ShooterToEnemies shooter;
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera camera, UIEventsCamera;
     public Action OnInstantiateElement;
     private EnemyStatesConfiguration _enemyStatesConfiguration;
     private IMediadorAR _ar;
@@ -51,6 +51,8 @@ public class StateOfGame : MonoBehaviour, IMediator
             _hasClick = true;
             positionToClick = _ar.GetMousePosition();
         }
+        WriteAngel(camera.transform.position.ToString());
+        WriteAngel(UIEventsCamera.transform.position.ToString());
     }
     private async void StartState(IEnemyState state, object data = null)
     {
@@ -81,6 +83,12 @@ public class StateOfGame : MonoBehaviour, IMediator
     {
         //Debug.Log(text);
         debugging.text += $"{text} \n";
+    }
+
+    public void WriteAngel(string text)
+    {
+        //Debug.Log(text);
+        debuggingAngel.text += $"{text} \n";
     }
 
     public bool ShootRaycast(Action action)
@@ -126,6 +134,10 @@ public class StateOfGame : MonoBehaviour, IMediator
     public Camera GetCamera()
     {
         return camera;
+    }
+    public Camera GetUIEventsCamera()
+    {
+        return UIEventsCamera;
     }
 
     public Vector3 GetMousePositionInScream()

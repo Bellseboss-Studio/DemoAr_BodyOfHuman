@@ -564,10 +564,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugging: {fileID: 1969684267}
+  debuggingAngel: {fileID: 1969684267}
   m_PlacedPrefab: {fileID: 2643102332351736153, guid: f38c4908faf7f64458b4ed257242b45d,
     type: 3}
   shooter: {fileID: 697685495}
   camera: {fileID: 0}
+  UIEventsCamera: {fileID: 0}
   placedPrefab: {fileID: 2643102332351736153, guid: f38c4908faf7f64458b4ed257242b45d,
     type: 3}
 --- !u!114 &697685495
