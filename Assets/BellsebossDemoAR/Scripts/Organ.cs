@@ -38,5 +38,16 @@ namespace BellsebossDemoAR.Scripts
             exclamationButton.SetActive(false);
             description.SetActive(true);
         }
+
+        public void ConfigureCamera(Camera getCamera)
+        {
+            
+            canvas.worldCamera = getCamera;
+        }
+
+        public Canvas GetCanvas()
+        {
+            return canvas;
+        }
     }
 }

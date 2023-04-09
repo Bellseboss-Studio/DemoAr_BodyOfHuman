@@ -101,5 +101,19 @@ namespace BellsebossDemoAR.Scripts
         {
             organs[_index].HideOrganCanvas();
         }
+
+        public void ConfigureOrgansCanvas(Camera getCamera, StateOfGame stateOfGame)
+        {
+            foreach (var organ in organs)
+            {
+                stateOfGame.WriteAngel(organ.GetCanvas().worldCamera == null
+                    ? "la camara es nula"
+                    : organ.GetCanvas().worldCamera.name);
+                organ.ConfigureCamera(getCamera);
+                stateOfGame.WriteAngel(organ.GetCanvas().worldCamera == null
+                    ? "la camara es nula"
+                    : organ.GetCanvas().worldCamera.name);
+            }
+        }
     }
 }
