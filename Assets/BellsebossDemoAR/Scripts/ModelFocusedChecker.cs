@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BellsebossDemoAR.Scripts
 {
@@ -16,6 +18,12 @@ namespace BellsebossDemoAR.Scripts
         private RaycastHit _rayCastHit;
         private Transform _arCameraTransform;
 
+        [Header("BodyUI")] 
+        [SerializeField] private GameObject bodyUIPanel;
+        [SerializeField] private TextMeshProUGUI description;
+        [SerializeField] private Button exclamationButton;
+        
+
         private void Start()
         {
             _arCameraTransform = ARCamera.transform;
@@ -23,9 +31,10 @@ namespace BellsebossDemoAR.Scripts
             {
                 _objectWasInstantiated = true;
                 stateOfGame.GetObjectInstantiate().TryGetComponent(out _objectInteractableInWord);
-                _objectInteractableInWord.OnChangeObject += () =>
+                _objectInteractableInWord.OnChangeObject += (label) =>
                 {
                     _objectIsFocus = false;
+                    ChangeObjectUI(label);
                 };
             };
         }
@@ -38,7 +47,6 @@ namespace BellsebossDemoAR.Scripts
                 var rayCastInfo = Physics.RaycastAll(_arCameraTransform.position, _arCameraTransform.forward, 1000/*, layer.value*/);
                 if (rayCastInfo.Length >= 1)
                 {
-                    Debug.Log(rayCastInfo.Length);
                     if (_objectIsFocus)
                     {
                         foreach (var raycastHit in rayCastInfo)
@@ -67,7 +75,6 @@ namespace BellsebossDemoAR.Scripts
                 }
                 else
                 {
-                    Debug.Log(rayCastInfo.Length);
                     if (_objectIsFocus)
                     {
                         CurrentOrganStoppedBeingFocused();
@@ -79,14 +86,39 @@ namespace BellsebossDemoAR.Scripts
         private void CurrentOrganStoppedBeingFocused()
         {
             _objectIsFocus = false;
-            _objectInteractableInWord.CurrentOrganStoppedBeingFocused();
+            HideOrganCanvas();
         }
 
         private void CurrentOrganWasFocused(RaycastHit raycastHit)
         {
-            _objectInteractableInWord.CurrentOrganWasFocused();
             _objectIsFocus = true;
             _rayCastHit = raycastHit;
+            ShowOrganCanvas();
         }
+
+        private void ChangeObjectUI(OrganLabel label)
+        {
+            description.text = label.Description;
+            HideOrganCanvas();
+        }
+        
+        private void ShowOrganCanvas()
+        {
+            exclamationButton.gameObject.SetActive(true);
+            description.gameObject.SetActive(false);
+            bodyUIPanel.gameObject.SetActive(true);
+        }
+
+        private void HideOrganCanvas()
+        {
+            bodyUIPanel.gameObject.SetActive(false);
+        }
+
+        public void ShowDescription()
+        {
+            exclamationButton.gameObject.SetActive(false);
+            description.gameObject.SetActive(true);
+        }
+        
     }
 }

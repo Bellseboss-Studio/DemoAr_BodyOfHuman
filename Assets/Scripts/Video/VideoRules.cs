@@ -11,7 +11,7 @@ public class VideoRules : MonoBehaviour
 
    private void Start()
    {
-      SkipVideo();
+      /*SkipVideo();*/
       StartVideo();
    }
 

@@ -1117,9 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materials: []
-  canvas: {fileID: 4331999055802837553}
-  exclamationButton: {fileID: 3721195335326101493}
-  description: {fileID: 2984989927052604194}
+  label: {fileID: 11400000, guid: e1b33c8ad8be1cf439fdb6dccbd814bb, type: 2}
 --- !u!1 &5119963980795640344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,9 +1643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materials: []
-  canvas: {fileID: 292370925232123467}
-  exclamationButton: {fileID: 2365596024757124236}
-  description: {fileID: 5546754246720847196}
+  label: {fileID: 11400000, guid: f24bf4588d457274f8ed95c8ffb5ba96, type: 2}
 --- !u!1 &6619364989361617879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,22 +2217,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000081460335
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
-        type: 3}
-      propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
+        type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
         type: 3}
@@ -2246,7 +2242,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 311a8c6063a1f374c9328b1ac5c5c373,
         type: 3}
@@ -2308,6 +2304,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materials: []
-  canvas: {fileID: 1803055442060660887}
-  exclamationButton: {fileID: 4378581912755071434}
-  description: {fileID: 4760157147040615027}
+  label: {fileID: 11400000, guid: 6e43aa56a6291cf42abbf63aba12b4a6, type: 2}
