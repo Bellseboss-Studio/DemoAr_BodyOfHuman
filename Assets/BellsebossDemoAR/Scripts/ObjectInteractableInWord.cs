@@ -10,7 +10,7 @@ namespace BellsebossDemoAR.Scripts
         [SerializeField] private Organ body;
         private int _index;
         [SerializeField] private List<Organ> organs;
-        public Action OnChangeObject;
+        public Action <OrganLabel> OnChangeObject;
     
     
         private void Start()
@@ -18,6 +18,7 @@ namespace BellsebossDemoAR.Scripts
             ConfigureOrgans();
             HideOtherObjects();
             ShowOrgan();
+            OnChangeObject?.Invoke(organs[_index].Label);
         }
 
         private void ConfigureOrgans()
@@ -31,14 +32,13 @@ namespace BellsebossDemoAR.Scripts
 
         public void NextObject()
         {
-            CurrentOrganStoppedBeingFocused();
             _index++;
             if (_index >= organs.Count)
             {
                 _index = 0;
             }
             ShowOrgan();
-            OnChangeObject?.Invoke();
+            OnChangeObject?.Invoke(organs[_index].Label);
         }
 
         private void ShowOrgan()
@@ -77,43 +77,18 @@ namespace BellsebossDemoAR.Scripts
 
         public void PreviousObject()
         {
-            CurrentOrganStoppedBeingFocused();
             _index--;
             if (_index < 0)
             {
                 _index = organs.Count -1;
             }
             ShowOrgan();
-            OnChangeObject?.Invoke();
+            OnChangeObject?.Invoke(organs[_index].Label);
         }
 
         public GameObject GetCurrentOrgan()
         {
             return organs[_index].gameObject;
-        }
-
-        public void CurrentOrganWasFocused()
-        {
-            organs[_index].ShowOrganCanvas();
-        }
-
-        public void CurrentOrganStoppedBeingFocused()
-        {
-            organs[_index].HideOrganCanvas();
-        }
-
-        public void ConfigureOrgansCanvas(Camera getCamera, StateOfGame stateOfGame)
-        {
-            foreach (var organ in organs)
-            {
-                stateOfGame.WriteAngel(organ.GetCanvas().worldCamera == null
-                    ? "la camara es nula"
-                    : organ.GetCanvas().worldCamera.name);
-                organ.ConfigureCamera(getCamera);
-                stateOfGame.WriteAngel(organ.GetCanvas().worldCamera == null
-                    ? "la camara es nula"
-                    : organ.GetCanvas().worldCamera.name);
-            }
         }
     }
 }

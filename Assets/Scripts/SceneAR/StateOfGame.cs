@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
 
 public class StateOfGame : MonoBehaviour, IMediator
@@ -212,5 +213,10 @@ public class StateOfGame : MonoBehaviour, IMediator
     public GameObject GetObjectInstantiate()
     {
         return escenarioInteractivo;
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene(1);
     }
 }

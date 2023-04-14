@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace BellsebossDemoAR.Scripts
@@ -7,8 +8,9 @@ namespace BellsebossDemoAR.Scripts
     public class Organ : MonoBehaviour
     {
         public List<Material> materials;
-        [SerializeField] private Canvas canvas;
-        [SerializeField] private GameObject exclamationButton, description;
+        [SerializeField] private OrganLabel label;
+        public OrganLabel Label => label;
+
 
         public void Configure()
         {
@@ -19,35 +21,6 @@ namespace BellsebossDemoAR.Scripts
             {
                 materials.Add(material);
             }
-        }
-
-        public void ShowOrganCanvas()
-        {
-            exclamationButton.SetActive(true);
-            description.SetActive(false);
-            canvas.gameObject.SetActive(true);
-        }
-
-        public void HideOrganCanvas()
-        {
-            canvas.gameObject.SetActive(false);
-        }
-
-        public void ShowDescription()
-        {
-            exclamationButton.SetActive(false);
-            description.SetActive(true);
-        }
-
-        public void ConfigureCamera(Camera getCamera)
-        {
-            
-            canvas.worldCamera = getCamera;
-        }
-
-        public Canvas GetCanvas()
-        {
-            return canvas;
         }
     }
 }
