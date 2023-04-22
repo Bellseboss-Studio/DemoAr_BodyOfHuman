@@ -7,7 +7,7 @@ namespace BellsebossDemoAR.Scripts
 {
     public class Organ : MonoBehaviour
     {
-        public List<Material> materials;
+        [HideInInspector] public List<Material> materials;
         [SerializeField] private OrganLabel label;
         public OrganLabel Label => label;
 
