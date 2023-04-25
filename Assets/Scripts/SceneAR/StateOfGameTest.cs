@@ -32,6 +32,8 @@ namespace SceneAR
                 if (escenarioInteractivo == null)
                 {
                     escenarioInteractivo = Instantiate(placedPrefab);
+                    escenarioInteractivo.transform.LookAt(Camera.allCameras[0].transform);
+                    escenarioInteractivo.transform.eulerAngles = new Vector3(0, escenarioInteractivo.transform.eulerAngles.y -180, 0);
                 }
                 OnInstantiateElement?.Invoke();
             }

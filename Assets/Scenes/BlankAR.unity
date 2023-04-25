@@ -1957,7 +1957,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateOfGame: {fileID: 1270279105}
-  ui: {fileID: 499608537}
 --- !u!114 &1270279109
 MonoBehaviour:
   m_ObjectHideFlags: 0

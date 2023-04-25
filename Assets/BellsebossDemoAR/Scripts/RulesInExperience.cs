@@ -7,15 +7,12 @@ using UnityEngine;
 public class RulesInExperience : MonoBehaviour
 {
     [SerializeField] private StateOfGame stateOfGame;
-    [SerializeField] private GameObject ui;
     private ObjectInteractableInWord _objectInteractableInWord;
 
     private void Start()
     {
-        ui.SetActive(false);
         stateOfGame.OnInstantiateElement += () =>
         {
-            ui.SetActive(true);
             stateOfGame.GetObjectInstantiate().TryGetComponent(out _objectInteractableInWord);
         };
     }

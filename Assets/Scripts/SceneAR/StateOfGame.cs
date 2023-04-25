@@ -100,6 +100,8 @@ public class StateOfGame : MonoBehaviour, IMediator
             if (escenarioInteractivo == null)
             {
                 escenarioInteractivo = _ar.InstantiateObjectInRaycast(GetPositionInWord(), m_PlacedPrefab);
+                escenarioInteractivo.transform.LookAt(camera.transform);
+                escenarioInteractivo.transform.eulerAngles = new Vector3(0, escenarioInteractivo.transform.eulerAngles.y -180, 0);
             }
             action?.Invoke();
             OnInstantiateElement?.Invoke();
