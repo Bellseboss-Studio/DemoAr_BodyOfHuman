@@ -17,7 +17,7 @@ namespace BellsebossDemoAR.Scripts
         private bool _objectIsFocus = false;
         private RaycastHit _rayCastHit;
         private Transform _arCameraTransform;
-
+        
         [Header("BodyUI")] 
         [SerializeField] private GameObject bodyUIPanel;
         [SerializeField] private TextMeshProUGUI description;
@@ -34,7 +34,7 @@ namespace BellsebossDemoAR.Scripts
                 _objectInteractableInWord.OnChangeObject += (label) =>
                 {
                     _objectIsFocus = false;
-                    ChangeObjectUI(label);
+                    /*ChangeObjectUI(label);*/
                 };
             };
         }
@@ -44,7 +44,7 @@ namespace BellsebossDemoAR.Scripts
             if (_objectWasInstantiated)
             {
                 Debug.DrawRay(_arCameraTransform.position, _arCameraTransform.forward * 1000, Color.blue);
-                var rayCastInfo = Physics.RaycastAll(_arCameraTransform.position, _arCameraTransform.forward, 1000/*, layer.value*/);
+                var rayCastInfo = Physics.RaycastAll(_arCameraTransform.position, _arCameraTransform.forward, 1000);
                 if (rayCastInfo.Length >= 1)
                 {
                     if (_objectIsFocus)
@@ -86,17 +86,17 @@ namespace BellsebossDemoAR.Scripts
         private void CurrentOrganStoppedBeingFocused()
         {
             _objectIsFocus = false;
-            HideOrganCanvas();
+            _objectInteractableInWord.CurrentOrganStoppedBeingFocused();
         }
 
         private void CurrentOrganWasFocused(RaycastHit raycastHit)
         {
             _objectIsFocus = true;
             _rayCastHit = raycastHit;
-            ShowOrganCanvas();
+            _objectInteractableInWord.CurrentOrganWasFocused();
         }
 
-        private void ChangeObjectUI(OrganLabel label)
+        /*private void ChangeObjectUI(OrganLabel label)
         {
             description.text = label.Description;
             HideOrganCanvas();
@@ -118,7 +118,7 @@ namespace BellsebossDemoAR.Scripts
         {
             exclamationButton.gameObject.SetActive(false);
             description.gameObject.SetActive(true);
-        }
+        }*/
         
     }
 }

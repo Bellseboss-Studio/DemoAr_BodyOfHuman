@@ -646,10 +646,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet consectetur adipiscing elit, massa senectus
-    luctus consequat bibendum mus sem, tortor sociosqu purus scelerisque at nec.
-    Nullam tempus mi vehicula fames pellentesque habitant ligula accumsan pulvinar
-    magna congue faucibus commodo.
+  m_text: '-Creditos aqui.
+
+    -Otra linea de creditos.
+
+    -Ultima linea de creditos.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

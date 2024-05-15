@@ -32,6 +32,7 @@ namespace BellsebossDemoAR.Scripts
 
         public void NextObject()
         {
+            CurrentOrganStoppedBeingFocused();
             _index++;
             if (_index >= organs.Count)
             {
@@ -62,6 +63,7 @@ namespace BellsebossDemoAR.Scripts
                 material.color = new Color(color.r, color.g, color.b, 1);
                 material.renderQueue++;
             }
+            /*organs[_index].ShowOrganCanvas();*/
         }
 
         private void HideOtherObjects()
@@ -77,6 +79,7 @@ namespace BellsebossDemoAR.Scripts
 
         public void PreviousObject()
         {
+            CurrentOrganStoppedBeingFocused();
             _index--;
             if (_index < 0)
             {
@@ -86,6 +89,16 @@ namespace BellsebossDemoAR.Scripts
             OnChangeObject?.Invoke(organs[_index].Label);
         }
 
+        public void CurrentOrganWasFocused()
+        {
+            organs[_index].ShowOrganCanvas();
+        }
+
+        public void CurrentOrganStoppedBeingFocused()
+        {
+            organs[_index].HideOrganCanvas();
+        }
+        
         public GameObject GetCurrentOrgan()
         {
             return organs[_index].gameObject;
